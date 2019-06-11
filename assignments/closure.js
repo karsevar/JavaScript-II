@@ -1,5 +1,17 @@
 // ==== Challenge 1: Write your own closure ====
 // Write a simple closure of your own creation.  Keep it simple!
+const repeatName = (name) => {
+	return function() {
+		return name += ' ' + name;
+	}
+} 
+
+const name = repeatName('mason');
+console.log(name());
+console.log(name());
+console.log(name());
+// Interesting with each iteration the name printed to the console 
+// doubles inplace of increasing by only one.
 
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
