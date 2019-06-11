@@ -29,28 +29,40 @@ function getLength(arr, cb) {
   // getLength passes the length of the array into the callback.
   return cb(arr.length);
 }
-
+// invocation getLength():
 getLength(items, length => console.log('The length of the array is: ', length));
 
 function last(arr, cb) {
   // last passes the last item of the array into the callback.
   return cb(arr[arr.length - 1]);
 }
-
+// invocation last(): 
 last(items, last => console.log('The last item in the array is: ', last));
 
 function sumNums(x, y, cb) {
   // sumNums adds two numbers (x, y) and passes the result to the callback.
+  return cb(x + y);
 }
+//invocation sumNums():
+sumNums(1, 2, sum => console.log('The sum of the numbers is: ', sum));
 
 function multiplyNums(x, y, cb) {
   // multiplyNums multiplies two numbers and passes the result to the callback.
+  return cb(x * y);
 }
+//  invocation multiplyNums():
+multiplyNums(5, 2, function(product) {
+  console.log('The product of the numbers is: ', product); 
+});
 
 function contains(item, list, cb) {
   // contains checks if an item is present inside of the given array/list.
   // Pass true to the callback if it is, otherwise pass false.
+  let logic = list.includes(item);
+  return cb(logic);
 }
+// invocation contains():
+contains('Pencilly', items, truthy => console.log(truthy));
 
 /* STRETCH PROBLEM */
 
