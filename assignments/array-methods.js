@@ -100,7 +100,59 @@ console.log(ticketPriceTotal);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Getting the name and contact information of the largest doners. For now above 100 dollars.
+let largestDonations = runners.filter(runner => runner.donation >= 100).map(runner => {
+	return {'first_name': runner.first_name, 'last_name': runner.last_name, 'email': runner.email, 'donation': runner.donation};
+});
+console.log(largestDonations);
+
+/* 
+
+found out that writing arr.map(runner => {key: value}) confusions interpretor.
+you need to write object returns in .map() methods as:
+
+arr.map(runner => {
+	return {key: value};
+});
+
+*/
 
 // Problem 2
+// How many people wear 'L' T-shirts? With reduce:
+let largeCount = runners.reduce((count, currentValue) => {
+	if (currentValue.shirt_size === 'L') {
+		count += 1;
+		return count
+	}
+	return count
+}, 0)
+
+console.log(largeCount);
+// 6 // let's see if this is correct.
+
+let largeCountCheck = runners.filter(runner => {
+	return runner.shirt_size === 'L';
+})
+console.log(largeCountCheck.length);
+// console.log(largeCountCheck);
+// The reduce command was correct the answer was 6 in total.
+
+
 
 // Problem 3
+// What is the number of donation companies? 
+
+/* 
+
+Got the following code from:
+https://stackoverflow.com/questions/15052702/count-unique-elements-in-array-without-sorting
+
+It uses reduce to find and count the unique values in an array;
+
+*/
+
+let uniqShirtSizes = runners.map(runner => runner.shirt_size).reduce((acc, val) => {
+  acc[val] = acc[val] === undefined ? 1 : acc[val] += 1;
+  return acc;
+}, {});
+console.log(uniqsShirtSizes);
