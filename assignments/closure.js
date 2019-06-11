@@ -54,21 +54,14 @@ const counterFactory = () => {
 
 const counterObject = counterFactory();
 console.log(counterObject.increment());
-// 1
 console.log(counterObject.increment());
-// 2
 console.log(counterObject.increment());
-// 3
 console.log(counterObject.decrement());
-// 4
 console.log(counterObject.decrement());
-// 3
 console.log(counterObject.decrement());
-// 2
 console.log(counterObject.increment());
-// 1
 console.log(counterObject.increment());
-// 2
+
 
 // The behavior seems a little weird will need to check the logic.
 

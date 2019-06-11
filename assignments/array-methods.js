@@ -155,4 +155,4 @@ let uniqShirtSizes = runners.map(runner => runner.shirt_size).reduce((acc, val) 
   acc[val] = acc[val] === undefined ? 1 : acc[val] += 1;
   return acc;
 }, {});
-console.log(uniqsShirtSizes);
+console.log(uniqShirtSizes);
