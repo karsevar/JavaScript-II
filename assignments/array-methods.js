@@ -55,29 +55,104 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
-let fullName = [];
+
+/*
+ the following code is inspired by the MDN example on forEach() and populating 
+ a new array with the method.
+
+ with map the code could have been:
+ const fullName = runners.forEach(runner => {
+	return fullName.push(runner.first_name + ' ' + runner.last_name);
+ });
+
+ But it seems that such a syntax doesn't work with this method.
+*/ 
+const fullName = []
+
+runners.forEach(runner => {
+	return fullName.push(runner.first_name + ' ' + runner.last_name);
+});
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
-let allCaps = [];
+let allCaps = runners.map(runner => {
+	return runner.first_name.toUpperCase();
+});
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
-let largeShirts = [];
+let largeShirts = runners.filter(runner => {
+	return runner.shirt_size == 'L';
+});
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
-let ticketPriceTotal = [];
+let ticketPriceTotal = runners.reduce((acc, currentValue) => {
+	acc += currentValue.donation;
+	return acc; 
+}, 0);
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Getting the name and contact information of the largest doners. For now above 100 dollars.
+let largestDonations = runners.filter(runner => runner.donation >= 100).map(runner => {
+	return {'first_name': runner.first_name, 'last_name': runner.last_name, 'email': runner.email, 'donation': runner.donation};
+});
+console.log(largestDonations);
+
+/* 
+
+found out that writing arr.map(runner => {key: value}) confusions interpretor.
+you need to write object returns in .map() methods as:
+
+arr.map(runner => {
+	return {key: value};
+});
+
+*/
 
 // Problem 2
+// How many people wear 'L' T-shirts? With reduce:
+let largeCount = runners.reduce((count, currentValue) => {
+	if (currentValue.shirt_size === 'L') {
+		count += 1;
+		return count
+	}
+	return count
+}, 0)
+
+console.log(largeCount);
+// 6 // let's see if this is correct.
+
+let largeCountCheck = runners.filter(runner => {
+	return runner.shirt_size === 'L';
+})
+console.log(largeCountCheck.length);
+// console.log(largeCountCheck);
+// The reduce command was correct the answer was 6 in total.
+
+
 
 // Problem 3
+// What is the number of donation companies? 
+
+/* 
+
+Got the following code from:
+https://stackoverflow.com/questions/15052702/count-unique-elements-in-array-without-sorting
+
+It uses reduce to find and count the unique values in an array;
+
+*/
+
+let uniqShirtSizes = runners.map(runner => runner.shirt_size).reduce((acc, val) => {
+  acc[val] = acc[val] === undefined ? 1 : acc[val] += 1;
+  return acc;
+}, {});
+console.log(uniqShirtSizes);
